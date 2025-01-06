@@ -1,0 +1,55 @@
+ansible_user: matt
+
+docker_compose_dirs:
+  - homepage
+  - media_server
+  - compose
+
+global_vars:
+  LOG_MAX_SIZE: "50M"
+  LOG_MAX_FILE: "3"
+  TZ: "Pacific/Auckland"
+
+paths:
+  NFS_MOUNT_PATH: "/mnt/data"
+  CONTAINER_CONFIG_DIR: "/home/{{ ansible_user }}/containers"
+
+user_group:
+  UID: "1027"
+  GID: "100"
+  PUID: "1027"
+  PGID: "100"
+  GROUP: "100"
+  UMASK: "002"
+
+media_server:
+  COMPOSE_PROJECT_NAME: "media-server"
+  config_dirs:
+    QBITTORRENT: "qbittorrent"
+    TAUTULLI: "tautulli"
+    JDOWNLOADER: "jdownloader"
+    RADARR: "radarr"
+    SONARR: "sonarr"
+    PROWLARR: "prowlarr"
+    READARR: "readarr"
+    LIDARR: "lidarr"
+    BAZARR: "bazarr"
+  custom_data_dirs:
+    JDOWNLOADER: "output"
+
+homepage:
+  COMPOSE_PROJECT_NAME: "homepage"
+
+  docker:
+    CONFIG_PATH: "{{ paths.CONTAINER_CONFIG_DIR }}/homepage"
+    DATA_ROOT_PATH: "{{ paths.NFS_MOUNT_PATH }}/"
+    WEBUI_PORT: 3000
+
+  widgets:
+    TITLE: "Homepage"
+    SEARCH_PROVIDER: "google"
+    WEATHER_CITY: "Auckland"
+    WEATHER_LAT: "-36.8485"
+    WEATHER_LONG: "174.7633"
+    WEATHER_TZ: "{{ global_vars.TZ }}"
+    WEATHER_UNIT: "metric"

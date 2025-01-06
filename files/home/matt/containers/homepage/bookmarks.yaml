@@ -1,0 +1,54 @@
+---
+- Quick:
+    - YouTube:
+        - icon: youtube.svg
+          href: https://youtube.com
+          description: Video Monopoly
+    - Proton Mail:
+        - icon: proton-mail.svg
+          href: https://mail.proton.me
+          description: Encrypted Email
+    - Reddit:
+        - icon: reddit.svg
+          href: https://reddit.com
+          description: Social Media Monopoly
+
+- Access:
+    - ChatGPT:
+        - icon: chatgpt.svg
+          href: https://chat.openai.com/
+          description: Chat Bot
+    - Google Gemini:
+        - icon: google-gemini.svg
+          href: https://gemini.google.com/
+          description: Google Gemini
+    - LXC Scripts:
+        - icon: github.svg
+          href: https://helper-scripts.com/scripts
+          description: Proxmox VE Helper Scripts
+
+- Torrent Sites:
+    - BHD:
+        - icon: https://beyond-hd.me/favicon.ico
+          href: https://beyond-hd.me
+          description: Beyond HD
+    - TorrentLeech:
+        - icon: https://www.torrentleech.org/favicon.ico
+          href: https://torrentleech.org
+          description: TorrentLeech
+    - TorrentDay:
+        - icon: https://www.torrentday.com/zfb/zfb.ico?v=2.0
+          href: https://torrentday.com
+          description: Torrent Day
+    - FileList:
+        - icon: https://filelist.io/favicon.ico
+          href: https://filelist.io
+          description: FileList
+    - My Anonymouse:
+        - icon: https://cdn.myanonamouse.net/favicon-32x32.png
+          href: https://myanonamouse.net
+          description: My Anonymouse
+    - Orpheus:
+        - icon: https://orpheus.network/favicon.ico
+          href: https://orpheus.network/login.php
+          description: Orpheus

@@ -1,0 +1,34 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/service-widgets
+
+- greeting:
+    text_size: xl
+    text: Welcome to {{HOMEPAGE_VAR_TITLE}}
+
+- resources:
+    expanded: true
+    cpu: true
+    memory: true
+    uptime: true
+    refresh: 1000
+    disk:
+      - /data
+
+- search:
+    provider: {{HOMEPAGE_VAR_SEARCH_PROVIDER}}
+    target: _blank
+
+- datetime:
+    text_size: md
+    format:
+      timeStyle: short
+      dateStyle: long
+
+- openmeteo:
+    label: {{HOMEPAGE_VAR_WEATHER_CITY}}
+    latitude: {{HOMEPAGE_VAR_WEATHER_LAT}}
+    longitude: {{HOMEPAGE_VAR_WEATHER_LONG}}
+    timezone: {{HOMEPAGE_VAR_WEATHER_TZ}}
+    units: {{HOMEPAGE_VAR_WEATHER_UNIT}}
+    cache: 5

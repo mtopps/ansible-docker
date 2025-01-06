@@ -1,0 +1,164 @@
+---
+- Data:
+    - Calendar:
+        icon: mdi-calendar-month
+        widget:
+          type: calendar
+          firstDayInWeek: sunday
+          view: monthly
+          maxEvents: 10
+          showTime: true
+          timezone: Pacific/Auckland
+          integrations:
+            - type: sonarr
+              service_group: Media
+              service_name: Sonarr
+              color: teal
+              params:
+                unmonitored: true
+            - type: radarr
+              service_group: Media
+              service_name: Radarr
+              color: amber
+              params:
+                unmonitored: true
+
+- Infrastructure:
+    - Proxmox:
+        icon: proxmox.svg
+        href: {{HOMEPAGE_VAR_PROXMOX_URL}}
+        description: Proxmox Server
+        widget:
+          type: proxmox
+          url: {{HOMEPAGE_VAR_PROXMOX_URL}}
+          username: {{HOMEPAGE_VAR_PROXMOX_USERNAME}}
+          password: {{HOMEPAGE_VAR_PROXMOX_PASSWORD}}
+          node: pve
+
+    - Nginx Proxy Manager:
+        icon: nginx-proxy-manager.svg
+        href: {{HOMEPAGE_VAR_NPM_URL}}
+        description: Nginx Proxy Manager
+        widget:
+          type: npm
+          url: {{HOMEPAGE_VAR_NPM_URL}}
+          username: {{HOMEPAGE_VAR_NPM_USERNAME}}
+          password: {{HOMEPAGE_VAR_NPM_PASSWORD}}
+
+    - MediaNAS:
+        icon: synology-dsm.svg
+        href: {{HOMEPAGE_VAR_DISKSTATION_URL}}
+        description: MediaNAS
+        widget:
+          type: diskstation
+          url: {{HOMEPAGE_VAR_DISKSTATION_URL}}
+          username: {{HOMEPAGE_VAR_DISKSTATION_USERNAME}}
+          password: {{HOMEPAGE_VAR_DISKSTATION_PASSWORD}}
+
+- Media:
+    - Plex:
+        icon: plex.svg
+        href: {{HOMEPAGE_VAR_PLEX_URL}}
+        description: Plex Media Server
+        widget:
+          type: plex
+          fields: ["streams", "movies", "tv"]
+          url: {{HOMEPAGE_VAR_PLEX_URL}}
+          key: {{HOMEPAGE_VAR_PLEX_TOKEN}}
+
+    - Tautulli:
+        icon: tautulli.svg
+        href: {{HOMEPAGE_VAR_TAUTULLI_URL}}
+        description: Plex Monitoring
+        server: my-docker
+        container: tautulli
+        widget:
+          type: tautulli
+          url: {{HOMEPAGE_VAR_TAUTULLI_URL}}
+          key: {{HOMEPAGE_VAR_TAUTULLI_KEY}}
+          enableUser: true
+          showEpisodeNumber: true
+          expandOneStrreamToTwoRows: false
+
+    - Radarr:
+        icon: radarr.svg
+        href: {{HOMEPAGE_VAR_RADARR_URL}}
+        description: Movie management
+        server: my-docker
+        container: radarr
+        widget:
+          type: radarr
+          fields: ["movies", "wanted", "queued"]
+          url: {{HOMEPAGE_VAR_RADARR_URL}}
+          key: {{HOMEPAGE_VAR_RADARR_KEY}}
+
+    - Sonarr:
+        icon: sonarr.svg
+        href: {{HOMEPAGE_VAR_SONARR_URL}}
+        description: TV management
+        server: my-docker
+        container: sonarr
+        widget:
+          type: sonarr
+          fields: ["series", "wanted", "queued"]
+          url: {{HOMEPAGE_VAR_SONARR_URL}}
+          key: {{HOMEPAGE_VAR_SONARR_KEY}}
+
+    - Readarr:
+        icon: readarr.svg
+        href: {{HOMEPAGE_VAR_READARR_URL}}
+        description: Book management
+        server: my-docker
+        container: readarr
+        widget:
+          type: readarr
+          fields: ["wanted", "queued"]
+          url: {{HOMEPAGE_VAR_READARR_URL}}
+          key: {{HOMEPAGE_VAR_READARR_KEY}}
+
+    - Lidarr:
+        icon: lidarr.svg
+        href: {{HOMEPAGE_VAR_LIDARR_URL}}
+        description: Music management
+        server: my-docker
+        container: lidarr
+        widget:
+          type: lidarr
+          fields: ["wanted", "queued"]
+          url: {{HOMEPAGE_VAR_LIDARR_URL}}
+          key: {{HOMEPAGE_VAR_LIDARR_KEY}}
+
+    - Bazarr:
+        icon: bazarr.svg
+        href: {{HOMEPAGE_VAR_BAZARR_URL}}
+        description: Subtitle management
+        server: my-docker
+        container: bazarr
+        widget:
+          type: bazarr
+          url: {{HOMEPAGE_VAR_BAZARR_URL}}
+          key: {{HOMEPAGE_VAR_BAZARR_KEY}}
+
+- Downloads:
+    - qBittorrent:
+        icon: qbittorrent.svg
+        href: {{HOMEPAGE_VAR_QBITTORRENT_URL}}
+        description: Torrent management
+        server: my-docker
+        container: qbittorrent
+        widget:
+          type: qbittorrent
+          url: {{HOMEPAGE_VAR_QBITTORRENT_URL}}
+          username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
+          password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
+
+    - Prowlarr:
+        icon: prowlarr.svg
+        href: {{HOMEPAGE_VAR_PROWLARR_URL}}
+        description: Index Pull Automation
+        server: my-docker
+        container: prowlarr
+        widget:
+          type: prowlarr
+          url: {{HOMEPAGE_VAR_PROWLARR_URL}}
+          key: {{HOMEPAGE_VAR_PROWLARR_KEY}}

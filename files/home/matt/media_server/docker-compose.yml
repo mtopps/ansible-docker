@@ -1,0 +1,137 @@
+networks:
+  media_net:
+    external: true
+    name: media_net
+
+x-default-container: &default-container
+  pull_policy: always
+  restart: unless-stopped
+  networks:
+    - media_net
+  logging:
+    driver: "json-file"
+    options:
+      max-size: ${LOG_MAX_SIZE}
+      max-file: ${LOG_MAX_FILE}
+
+x-arr-stack-environment: &arr-stack-environment
+    PUID: ${DEFAULT_PUID}
+    PGID: ${DEFAULT_PGID}
+    UMASK: ${DEFAULT_UMASK}
+    TZ: ${TZ}
+
+x-arr-stack-container: &arr-stack-container
+  <<: *default-container
+  group_add:
+   - ${DEFAULT_GROUP}
+  environment:
+    <<: *arr-stack-environment
+
+services:
+  radarr:
+    <<: *arr-stack-container
+    container_name: radarr
+    image: ghcr.io/hotio/radarr:latest
+    ports:
+      - 7878:7878
+    volumes:
+      - ${RADARR_CONFIG_DIR}:/config
+      - ${DEFAULT_DATA_DIR}:/data
+
+  sonarr:
+    <<: *arr-stack-container
+    container_name: sonarr
+    hostname: sonarr
+    image: ghcr.io/hotio/sonarr:latest
+    ports:
+      - 8989:8989
+    volumes:
+      - ${SONARR_CONFIG_DIR}:/config
+      - ${DEFAULT_DATA_DIR}:/data
+
+  prowlarr:
+    <<: *arr-stack-container
+    container_name: prowlarr
+    hostname: prowlarr
+    image: ghcr.io/hotio/prowlarr:latest
+    ports:
+      - 9696:9696
+    volumes:
+      - ${PROWLARR_CONFIG_DIR}:/config
+
+  readarr:
+    <<: *arr-stack-container
+    container_name: readarr
+    hostname: readarr
+    image: ghcr.io/hotio/readarr
+    ports:
+      - 8787:8787
+    volumes:
+      - ${READARR_CONFIG_DIR}:/config
+      - ${DEFAULT_DATA_DIR}:/data
+
+  lidarr:
+    <<: *arr-stack-container
+    container_name: lidarr
+    hostname: lidarr
+    image: ghcr.io/hotio/lidarr
+    ports:
+      - 8686:8686
+    volumes:
+      - ${LIDARR_CONFIG_DIR}:/config
+      - ${DEFAULT_DATA_DIR}:/data
+
+  bazarr:
+    <<: *default-container
+    container_name: bazarr
+    hostname: bazarr
+    image: ghcr.io/hotio/bazarr
+    ports:
+      - 6767:6767
+    environment:
+      <<: *arr-stack-environment
+      WEBUI_PORTS: 6767/tcp,6767/udp
+    volumes:
+      - ${BAZARR_CONFIG_DIR}:/config
+      - ${DEFAULT_DATA_DIR}:/data
+
+  qbittorrent:
+    <<: *default-container
+    container_name: qbittorrent
+    hostname: qbittorrent
+    image: ghcr.io/hotio/qbittorrent
+    ports:
+      - 8080:8080
+      - 56097:56097
+    environment:
+      <<: *arr-stack-environment
+      WEBUI_PORTS: 8080/tcp,8080/udp
+      TORRENTING_PORT: 56097/tcp,56097/udp
+    volumes:
+      - ${QBITTORRENT_CONFIG_DIR}:/config
+      - ${DEFAULT_DATA_DIR}:/data
+
+  tautulli:
+    <<: *arr-stack-container
+    container_name: tautulli
+    hostname: tautulli
+    image: ghcr.io/hotio/tautulli
+    ports:
+      - 8181:8181
+    volumes:
+      - ${TAUTULLI_CONFIG_DIR}:/config
+
+  jdownloader:
+    <<: *default-container
+    container_name: jdownloader
+    hostname: jdownloader
+    image: jlesage/jdownloader-2:latest
+    ports:
+      - 5800:5800
+    environment:
+      - USER_ID=${DEFAULT_PUID}
+      - GROUP_ID=${DEFAULT_PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${JDOWNLOADER_CONFIG_DIR}:/config:rw
+      - ${JDOWNLOADER_DATA_DIR}:/output:rw

@@ -1,0 +1,14 @@
+---
+services:
+  base:
+    pull_policy: always
+    restart: unless-stopped
+    networks:
+      - media_net
+    logging:
+      driver: "json-file"
+      options:
+        max-size: ${LOG_MAX_SIZE}
+        max-file: ${LOG_MAX_FILE}
+    environment:
+      TZ: ${TZ}

@@ -1,0 +1,46 @@
+---
+title: {{HOMEPAGE_VAR_TITLE}}
+
+background:
+  image: https://wallpapercave.com/wp/wp4565843.jpg
+  blur: md
+  saturate: 50
+  brightness: 50
+  opacity: 70
+
+cardBlur: md
+headerStyle: clean
+useEqualHeights: true
+disableCollapse: true
+hideVersion: false
+showStats: true
+statusStyle: "dot"
+target: _blank
+
+quicklaunch:
+  searchDescriptions: true
+  hideInternetSearch: true
+  hideVisitURL: true
+
+layout:
+  Data:
+    style: tab
+    columns: 2
+
+  Downloads:
+    style: row
+    columns: 2
+
+  Media:
+    style: row
+    columns: 4
+
+  Infrastructure:
+    style: row
+    columns: 2
+  
+  Quick:
+  Access:
+  Torrent Sites:
+    style: row
+    columns: 2
