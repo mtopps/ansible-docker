@@ -1,0 +1,12 @@
+---
+# .ansible-lint
+
+exclude_paths:
+  - .git
+  - .vscode
+  - files/
+
+skip_list:
+  - 'yaml'
+  - 'risky-file-permissions'
+  - 'role-name'

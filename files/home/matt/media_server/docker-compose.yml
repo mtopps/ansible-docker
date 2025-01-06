@@ -15,15 +15,15 @@ x-default-container: &default-container
       max-file: ${LOG_MAX_FILE}
 
 x-arr-stack-environment: &arr-stack-environment
-    PUID: ${DEFAULT_PUID}
-    PGID: ${DEFAULT_PGID}
-    UMASK: ${DEFAULT_UMASK}
-    TZ: ${TZ}
+  PUID: ${DEFAULT_PUID}
+  PGID: ${DEFAULT_PGID}
+  UMASK: ${DEFAULT_UMASK}
+  TZ: ${TZ}
 
 x-arr-stack-container: &arr-stack-container
   <<: *default-container
   group_add:
-   - ${DEFAULT_GROUP}
+    - ${DEFAULT_GROUP}
   environment:
     <<: *arr-stack-environment
 
