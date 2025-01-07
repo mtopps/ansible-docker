@@ -3,135 +3,172 @@ networks:
     external: true
     name: media_net
 
-x-default-container: &default-container
-  pull_policy: always
-  restart: unless-stopped
-  networks:
-    - media_net
-  logging:
-    driver: "json-file"
-    options:
-      max-size: ${LOG_MAX_SIZE}
-      max-file: ${LOG_MAX_FILE}
-
-x-arr-stack-environment: &arr-stack-environment
-  PUID: ${DEFAULT_PUID}
-  PGID: ${DEFAULT_PGID}
-  UMASK: ${DEFAULT_UMASK}
-  TZ: ${TZ}
-
-x-arr-stack-container: &arr-stack-container
-  <<: *default-container
-  group_add:
-    - ${DEFAULT_GROUP}
-  environment:
-    <<: *arr-stack-environment
-
 services:
   radarr:
-    <<: *arr-stack-container
+    extends:
+      file: ../compose/arr.yaml
+      service: arr-stack-container
     container_name: radarr
     image: ghcr.io/hotio/radarr:latest
-    ports:
-      - 7878:7878
     volumes:
       - ${RADARR_CONFIG_DIR}:/config
       - ${DEFAULT_DATA_DIR}:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.radarr-https.rule=Host(`radarr.local.mtopps.xyz`)
+      - traefik.http.routers.radarr-https.entrypoints=websecure
+      - traefik.http.routers.radarr-https.tls=true
+      - traefik.http.routers.radarr-https.tls.certresolver=cloudflare
+      - traefik.http.services.radarr-https.loadbalancer.server.port=7878
 
   sonarr:
-    <<: *arr-stack-container
+    extends:
+      file: ../compose/arr.yaml
+      service: arr-stack-container
     container_name: sonarr
     hostname: sonarr
     image: ghcr.io/hotio/sonarr:latest
-    ports:
-      - 8989:8989
     volumes:
       - ${SONARR_CONFIG_DIR}:/config
       - ${DEFAULT_DATA_DIR}:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.sonarr-https.rule=Host(`sonarr.local.mtopps.xyz`)
+      - traefik.http.routers.sonarr-https.entrypoints=websecure
+      - traefik.http.routers.sonarr-https.tls=true
+      - traefik.http.routers.sonarr-https.tls.certresolver=cloudflare
+      - traefik.http.services.sonarr-https.loadbalancer.server.port=8989
 
   prowlarr:
-    <<: *arr-stack-container
+    extends:
+      file: ../compose/arr.yaml
+      service: arr-stack-container
     container_name: prowlarr
     hostname: prowlarr
     image: ghcr.io/hotio/prowlarr:latest
-    ports:
-      - 9696:9696
     volumes:
       - ${PROWLARR_CONFIG_DIR}:/config
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.prowlarr-https.rule=Host(`prowlarr.local.mtopps.xyz`)
+      - traefik.http.routers.prowlarr-https.entrypoints=websecure
+      - traefik.http.routers.prowlarr-https.tls=true
+      - traefik.http.routers.prowlarr-https.tls.certresolver=cloudflare
+      - traefik.http.services.prowlarr-https.loadbalancer.server.port=9696
 
   readarr:
-    <<: *arr-stack-container
+    extends:
+      file: ../compose/arr.yaml
+      service: arr-stack-container
     container_name: readarr
     hostname: readarr
-    image: ghcr.io/hotio/readarr
-    ports:
-      - 8787:8787
+    image: ghcr.io/hotio/readarr:latest
     volumes:
       - ${READARR_CONFIG_DIR}:/config
       - ${DEFAULT_DATA_DIR}:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.readarr-https.rule=Host(`readarr.local.mtopps.xyz`)
+      - traefik.http.routers.readarr-https.entrypoints=websecure
+      - traefik.http.routers.readarr-https.tls=true
+      - traefik.http.routers.readarr-https.tls.certresolver=cloudflare
+      - traefik.http.services.readarr-https.loadbalancer.server.port=8787
 
   lidarr:
-    <<: *arr-stack-container
+    extends:
+      file: ../compose/arr.yaml
+      service: arr-stack-container
     container_name: lidarr
     hostname: lidarr
-    image: ghcr.io/hotio/lidarr
-    ports:
-      - 8686:8686
+    image: ghcr.io/hotio/lidarr:latest
     volumes:
       - ${LIDARR_CONFIG_DIR}:/config
       - ${DEFAULT_DATA_DIR}:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.lidarr-https.rule=Host(`lidarr.local.mtopps.xyz`)
+      - traefik.http.routers.lidarr-https.entrypoints=websecure
+      - traefik.http.routers.lidarr-https.tls=true
+      - traefik.http.routers.lidarr-https.tls.certresolver=cloudflare
+      - traefik.http.services.lidarr-https.loadbalancer.server.port=8686
 
   bazarr:
-    <<: *default-container
+    extends:
+      file: ../compose/arr.yaml
+      service: arr-stack-container
     container_name: bazarr
     hostname: bazarr
-    image: ghcr.io/hotio/bazarr
-    ports:
-      - 6767:6767
-    environment:
-      <<: *arr-stack-environment
-      WEBUI_PORTS: 6767/tcp,6767/udp
+    image: ghcr.io/hotio/bazarr:latest
     volumes:
       - ${BAZARR_CONFIG_DIR}:/config
       - ${DEFAULT_DATA_DIR}:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.bazarr-https.rule=Host(`bazarr.local.mtopps.xyz`)
+      - traefik.http.routers.bazarr-https.entrypoints=websecure
+      - traefik.http.routers.bazarr-https.tls=true
+      - traefik.http.routers.bazarr-https.tls.certresolver=cloudflare
+      - traefik.http.services.bazarr-https.loadbalancer.server.port=6767
+    environment:
+      WEBUI_PORTS: 6767/tcp,6767/udp
 
   qbittorrent:
-    <<: *default-container
+    extends:
+      file: ../compose/arr.yaml
+      service: arr-stack-container
     container_name: qbittorrent
     hostname: qbittorrent
-    image: ghcr.io/hotio/qbittorrent
+    image: ghcr.io/hotio/qbittorrent:latest
     ports:
-      - 8080:8080
       - 56097:56097
-    environment:
-      <<: *arr-stack-environment
-      WEBUI_PORTS: 8080/tcp,8080/udp
-      TORRENTING_PORT: 56097/tcp,56097/udp
     volumes:
       - ${QBITTORRENT_CONFIG_DIR}:/config
       - ${DEFAULT_DATA_DIR}:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.qbittorrent-https.rule=Host(`qbittorrent.local.mtopps.xyz`)
+      - traefik.http.routers.qbittorrent-https.entrypoints=websecure
+      - traefik.http.routers.qbittorrent-https.tls=true
+      - traefik.http.routers.qbittorrent-https.tls.certresolver=cloudflare
+      - traefik.http.services.qbittorrent-https.loadbalancer.server.port=8080
+    environment:
+      WEBUI_PORTS: 8080/tcp,8080/udp
+      TORRENTING_PORT: 56097/tcp,56097/udp
 
   tautulli:
-    <<: *arr-stack-container
+    extends:
+      file: ../compose/arr.yaml
+      service: arr-stack-container
     container_name: tautulli
     hostname: tautulli
-    image: ghcr.io/hotio/tautulli
-    ports:
-      - 8181:8181
+    image: ghcr.io/hotio/tautulli:latest
     volumes:
       - ${TAUTULLI_CONFIG_DIR}:/config
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.tautulli-https.rule=Host(`tautulli.local.mtopps.xyz`)
+      - traefik.http.routers.tautulli-https.entrypoints=websecure
+      - traefik.http.routers.tautulli-https.tls=true
+      - traefik.http.routers.tautulli-https.tls.certresolver=cloudflare
+      - traefik.http.services.tautulli-https.loadbalancer.server.port=8181
 
   jdownloader:
-    <<: *default-container
+    extends:
+      file: ../compose/base.yaml
+      service: base
     container_name: jdownloader
     hostname: jdownloader
     image: jlesage/jdownloader-2:latest
-    ports:
-      - 5800:5800
-    environment:
-      - USER_ID=${DEFAULT_PUID}
-      - GROUP_ID=${DEFAULT_PGID}
-      - TZ=${TZ}
     volumes:
       - ${JDOWNLOADER_CONFIG_DIR}:/config:rw
       - ${JDOWNLOADER_DATA_DIR}:/output:rw
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.jdownloader-https.rule=Host(`jdownloader.local.mtopps.xyz`)
+      - traefik.http.routers.jdownloader-https.entrypoints=websecure
+      - traefik.http.routers.jdownloader-https.tls=true
+      - traefik.http.routers.jdownloader-https.tls.certresolver=cloudflare
+      - traefik.http.services.jdownloader-https.loadbalancer.server.port=5800
+    environment:
+      USER_ID: ${DEFAULT_PUID}
+      GROUP_ID: ${DEFAULT_PGID}

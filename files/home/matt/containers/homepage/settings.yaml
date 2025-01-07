@@ -1,15 +1,11 @@
 ---
 title: {{HOMEPAGE_VAR_TITLE}}
 
-background:
-  image: https://wallpapercave.com/wp/wp4565843.jpg
-  blur: md
-  saturate: 50
-  brightness: 50
-  opacity: 70
+background: /images/lava-river.gif
 
 cardBlur: md
-headerStyle: clean
+backgroundOpacity: 0.6
+headerStyle: underline
 useEqualHeights: true
 disableCollapse: true
 hideVersion: false
@@ -24,8 +20,8 @@ quicklaunch:
 
 layout:
   Data:
-    style: tab
-    columns: 2
+    style: row
+    columns: 1
 
   Downloads:
     style: row

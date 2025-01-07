@@ -1,0 +1,12 @@
+---
+services:
+  arr-stack-container:
+    extends:
+      file: base.yaml
+      service: base
+    group_add:
+      - ${DEFAULT_GROUP}
+    environment:
+      PUID: ${DEFAULT_PUID}
+      PGID: ${DEFAULT_PGID}
+      UMASK: ${DEFAULT_UMASK}

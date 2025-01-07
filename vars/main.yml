@@ -5,6 +5,8 @@ docker_compose_dirs:
   - homepage
   - media_server
   - compose
+  - traefik
+  - watchtower
 
 global_vars:
   LOG_MAX_SIZE: "50M"
@@ -54,3 +56,6 @@ homepage:
     WEATHER_LONG: "174.7633"
     WEATHER_TZ: "{{ global_vars.TZ }}"
     WEATHER_UNIT: "metric"
+
+traefik:
+  COMPOSE_PROJECT_NAME: "traefik"

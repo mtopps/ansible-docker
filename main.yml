@@ -2,6 +2,9 @@
 - name: Sync media server config
   hosts: all
   gather_facts: true
+  vars_files:
+    - vars/main.yml
+    - vars/vault.yml
 
   tasks:
     - name: Create directories for docker compose configuration files
@@ -30,8 +33,10 @@
         - homepage
         - media_server
         - containers
+        - traefik
+        - watchtower
 
-    - name: Create and start homepage container
+    - name: Start containers
       community.docker.docker_compose_v2:
         project_src: "{{ ansible_env.HOME }}/{{ item }}"
         state: present
@@ -40,7 +45,4 @@
       loop:
         - homepage
         - media_server
-
-    - name: Print output
-      ansible.builtin.debug:
-        var: output
+        - traefik
