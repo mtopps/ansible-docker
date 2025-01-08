@@ -33,3 +33,4 @@
         - media_server
         - traefik
         - dozzle
+        - speedtest_tracker

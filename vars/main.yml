@@ -52,3 +52,16 @@ homepage:
 
 traefik:
   COMPOSE_PROJECT_NAME: "traefik"
+
+speedtest_tracker:
+  COMPOSE_PROJECT_NAME: "speedtest-tracker"
+  APP_KEY: "{{ speedtest_tracker_secrets_app_key }}"
+  APP_NAME: "speedtest-tracker"
+  APP_TIMEZONE: "{{ global_vars.TZ }}"
+  APP_LOCALE: "en"
+  APP_LOCALE_FALLBACK: "en"
+  APP_FAKE_LOCALE: "en_US"
+  SPEEDTEST_TRACKER_CONFIG_DIR: "{{ paths.CONTAINER_CONFIG_DIR }}/speedtest-tracker"
+  PUID: "{{ user_group.PUID }}"
+  PGID: "{{ user_group.PGID }}"
+  DB_CONNECTION: "sqlite"

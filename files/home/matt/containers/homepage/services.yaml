@@ -35,15 +35,15 @@
           password: {{HOMEPAGE_VAR_PROXMOX_PASSWORD}}
           node: pve
 
-    - Nginx Proxy Manager:
-        icon: nginx-proxy-manager.svg
-        href: {{HOMEPAGE_VAR_NPM_URL}}
-        description: Nginx Proxy Manager
+    - Speedtest Tracker:
+        icon: speedtest-tracker.png
+        href: {{HOMEPAGE_VAR_SPEEDTEST_URL}}
+        description: Speedtest Tracker
+        server: my-docker
+        container: speedtest-tracker
         widget:
-          type: npm
-          url: {{HOMEPAGE_VAR_NPM_URL}}
-          username: {{HOMEPAGE_VAR_NPM_USERNAME}}
-          password: {{HOMEPAGE_VAR_NPM_PASSWORD}}
+          type: speedtest
+          url: http://speedtest-tracker:80
 
     - traefik:
         icon: traefik.svg
@@ -88,7 +88,7 @@
         container: tautulli
         widget:
           type: tautulli
-          url: {{HOMEPAGE_VAR_TAUTULLI_URL}}
+          url: http://tautulli:8181
           key: {{HOMEPAGE_VAR_TAUTULLI_KEY}}
           enableUser: true
           showEpisodeNumber: true
@@ -103,7 +103,7 @@
         widget:
           type: radarr
           fields: ["movies", "wanted", "queued"]
-          url: {{HOMEPAGE_VAR_RADARR_URL}}
+          url: http://radarr:7878
           key: {{HOMEPAGE_VAR_RADARR_KEY}}
 
     - Sonarr:
@@ -115,7 +115,7 @@
         widget:
           type: sonarr
           fields: ["series", "wanted", "queued"]
-          url: {{HOMEPAGE_VAR_SONARR_URL}}
+          url: http://sonarr:8989
           key: {{HOMEPAGE_VAR_SONARR_KEY}}
 
     - Readarr:
@@ -127,7 +127,7 @@
         widget:
           type: readarr
           fields: ["wanted", "queued"]
-          url: {{HOMEPAGE_VAR_READARR_URL}}
+          url: http://readarr:8787
           key: {{HOMEPAGE_VAR_READARR_KEY}}
 
     - Lidarr:
@@ -139,7 +139,7 @@
         widget:
           type: lidarr
           fields: ["wanted", "queued"]
-          url: {{HOMEPAGE_VAR_LIDARR_URL}}
+          url: http://lidarr:8686
           key: {{HOMEPAGE_VAR_LIDARR_KEY}}
 
     - Bazarr:
@@ -150,7 +150,7 @@
         container: bazarr
         widget:
           type: bazarr
-          url: {{HOMEPAGE_VAR_BAZARR_URL}}
+          url: http://bazarr:6767
           key: {{HOMEPAGE_VAR_BAZARR_KEY}}
 
 - Downloads:
@@ -162,7 +162,7 @@
         container: qbittorrent
         widget:
           type: qbittorrent
-          url: {{HOMEPAGE_VAR_QBITTORRENT_URL}}
+          url: http://qbittorrent:8080
           username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
           password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
 
@@ -174,5 +174,5 @@
         container: prowlarr
         widget:
           type: prowlarr
-          url: {{HOMEPAGE_VAR_PROWLARR_URL}}
+          url: http://prowlarr:9696
           key: {{HOMEPAGE_VAR_PROWLARR_KEY}}

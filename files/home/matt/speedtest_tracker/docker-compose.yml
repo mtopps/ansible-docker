@@ -1,0 +1,30 @@
+networks:
+  media_net:
+    external: true
+
+services:
+  speedtest-tracker:
+    extends:
+      file: ../compose/base.yaml
+      service: base
+    container_name: speedtest-tracker
+    hostname: speedtest-tracker
+    image: lscr.io/linuxserver/speedtest-tracker:latest
+    volumes:
+      - ${SPEEDTEST_TRACKER_CONFIG_DIR}:/config
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.speedtest-tracker-rtr.rule=Host(`speedtest-tracker.local.mtopps.xyz`)
+      - traefik.http.routers.speedtest-tracker-rtr.entrypoints=https
+      - traefik.http.routers.speedtest-tracker-rtr.tls=true
+      - traefik.http.services.speedtest-tracker-svc.loadbalancer.server.port=80
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      APP_KEY: ${APP_KEY}
+      DB_CONNECTION: ${DB_CONNECTION}
+      APP_TIMEZONE: ${APP_TIMEZONE}
+      APP_LOCALE: ${APP_LOCALE}
+      APP_LOCALE_FALLBACK: ${APP_LOCALE_FALLBACK}
+      APP_FAKE_LOCALE: ${APP_FAKE_LOCALE}
+      SPEEDTEST_SCHEDULE: "0 */6 * * *"
