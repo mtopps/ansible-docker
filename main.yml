@@ -7,12 +7,11 @@
     - vars/vault.yml
 
   tasks:
-    - name: Create directories for docker compose configuration files
-      ansible.builtin.file:
-        path: "{{ ansible_env.HOME }}/{{ item }}"
-        state: directory
-        mode: "0755"
-      loop: "{{ docker_compose_dirs }}"
+    - name: Copy directories to remote server
+      ansible.builtin.copy:
+        src: "files/home/matt/"
+        dest: "{{ ansible_env.HOME }}"
+        mode: "0775"
 
     - name: Create .env files from templates
       ansible.builtin.template:
@@ -22,19 +21,6 @@
         backup: true
       loop: "{{ query('fileglob', 'templates/*.env.j2') }}"
       no_log: true
-
-    - name: Copy directories to remote server
-      ansible.builtin.copy:
-        src: "files/home/matt/{{ item }}/"
-        dest: "{{ ansible_env.HOME }}/{{ item }}"
-        mode: "0775"
-      loop:
-        - compose
-        - homepage
-        - media_server
-        - containers
-        - traefik
-        - watchtower
 
     - name: Start containers
       community.docker.docker_compose_v2:
@@ -46,3 +32,4 @@
         - homepage
         - media_server
         - traefik
+        - dozzle

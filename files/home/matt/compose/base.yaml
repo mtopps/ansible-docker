@@ -3,6 +3,8 @@ services:
   base:
     pull_policy: always
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     networks:
       - media_net
     logging:

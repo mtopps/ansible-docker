@@ -30,6 +30,7 @@ layout:
   Media:
     style: row
     columns: 4
+    useEqualHeights: true
 
   Infrastructure:
     style: row

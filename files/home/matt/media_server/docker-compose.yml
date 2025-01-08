@@ -9,17 +9,17 @@ services:
       file: ../compose/arr.yaml
       service: arr-stack-container
     container_name: radarr
+    hostname: radarr
     image: ghcr.io/hotio/radarr:latest
     volumes:
       - ${RADARR_CONFIG_DIR}:/config
       - ${DEFAULT_DATA_DIR}:/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.radarr-https.rule=Host(`radarr.local.mtopps.xyz`)
-      - traefik.http.routers.radarr-https.entrypoints=websecure
-      - traefik.http.routers.radarr-https.tls=true
-      - traefik.http.routers.radarr-https.tls.certresolver=cloudflare
-      - traefik.http.services.radarr-https.loadbalancer.server.port=7878
+      - traefik.http.routers.radarr-rtr.rule=Host(`radarr.local.mtopps.xyz`)
+      - traefik.http.routers.radarr-rtr.entrypoints=https
+      - traefik.http.routers.radarr-rtr.tls=true
+      - traefik.http.services.radarr-svc.loadbalancer.server.port=7878
 
   sonarr:
     extends:
@@ -33,11 +33,10 @@ services:
       - ${DEFAULT_DATA_DIR}:/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.sonarr-https.rule=Host(`sonarr.local.mtopps.xyz`)
-      - traefik.http.routers.sonarr-https.entrypoints=websecure
-      - traefik.http.routers.sonarr-https.tls=true
-      - traefik.http.routers.sonarr-https.tls.certresolver=cloudflare
-      - traefik.http.services.sonarr-https.loadbalancer.server.port=8989
+      - traefik.http.routers.sonarr-rtr.rule=Host(`sonarr.local.mtopps.xyz`)
+      - traefik.http.routers.sonarr-rtr.entrypoints=https
+      - traefik.http.routers.sonarr-rtr.tls=true
+      - traefik.http.services.sonarr-svc.loadbalancer.server.port=8989
 
   prowlarr:
     extends:
@@ -50,11 +49,10 @@ services:
       - ${PROWLARR_CONFIG_DIR}:/config
     labels:
       - traefik.enable=true
-      - traefik.http.routers.prowlarr-https.rule=Host(`prowlarr.local.mtopps.xyz`)
-      - traefik.http.routers.prowlarr-https.entrypoints=websecure
-      - traefik.http.routers.prowlarr-https.tls=true
-      - traefik.http.routers.prowlarr-https.tls.certresolver=cloudflare
-      - traefik.http.services.prowlarr-https.loadbalancer.server.port=9696
+      - traefik.http.routers.prowlarr-rtr.rule=Host(`prowlarr.local.mtopps.xyz`)
+      - traefik.http.routers.prowlarr-rtr.entrypoints=https
+      - traefik.http.routers.prowlarr-rtr.tls=true
+      - traefik.http.services.prowlarr-svc.loadbalancer.server.port=9696
 
   readarr:
     extends:
@@ -68,11 +66,10 @@ services:
       - ${DEFAULT_DATA_DIR}:/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.readarr-https.rule=Host(`readarr.local.mtopps.xyz`)
-      - traefik.http.routers.readarr-https.entrypoints=websecure
-      - traefik.http.routers.readarr-https.tls=true
-      - traefik.http.routers.readarr-https.tls.certresolver=cloudflare
-      - traefik.http.services.readarr-https.loadbalancer.server.port=8787
+      - traefik.http.routers.readarr-rtr.rule=Host(`readarr.local.mtopps.xyz`)
+      - traefik.http.routers.readarr-rtr.entrypoints=https
+      - traefik.http.routers.readarr-rtr.tls=true
+      - traefik.http.services.readarr-svc.loadbalancer.server.port=8787
 
   lidarr:
     extends:
@@ -86,11 +83,10 @@ services:
       - ${DEFAULT_DATA_DIR}:/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.lidarr-https.rule=Host(`lidarr.local.mtopps.xyz`)
-      - traefik.http.routers.lidarr-https.entrypoints=websecure
-      - traefik.http.routers.lidarr-https.tls=true
-      - traefik.http.routers.lidarr-https.tls.certresolver=cloudflare
-      - traefik.http.services.lidarr-https.loadbalancer.server.port=8686
+      - traefik.http.routers.lidarr-rtr.rule=Host(`lidarr.local.mtopps.xyz`)
+      - traefik.http.routers.lidarr-rtr.entrypoints=https
+      - traefik.http.routers.lidarr-rtr.tls=true
+      - traefik.http.services.lidarr-svc.loadbalancer.server.port=8686
 
   bazarr:
     extends:
@@ -104,11 +100,10 @@ services:
       - ${DEFAULT_DATA_DIR}:/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.bazarr-https.rule=Host(`bazarr.local.mtopps.xyz`)
-      - traefik.http.routers.bazarr-https.entrypoints=websecure
-      - traefik.http.routers.bazarr-https.tls=true
-      - traefik.http.routers.bazarr-https.tls.certresolver=cloudflare
-      - traefik.http.services.bazarr-https.loadbalancer.server.port=6767
+      - traefik.http.routers.bazarr-rtr.rule=Host(`bazarr.local.mtopps.xyz`)
+      - traefik.http.routers.bazarr-rtr.entrypoints=https
+      - traefik.http.routers.bazarr-rtr.tls=true
+      - traefik.http.services.bazarr-svc.loadbalancer.server.port=6767
     environment:
       WEBUI_PORTS: 6767/tcp,6767/udp
 
@@ -126,11 +121,10 @@ services:
       - ${DEFAULT_DATA_DIR}:/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.qbittorrent-https.rule=Host(`qbittorrent.local.mtopps.xyz`)
-      - traefik.http.routers.qbittorrent-https.entrypoints=websecure
-      - traefik.http.routers.qbittorrent-https.tls=true
-      - traefik.http.routers.qbittorrent-https.tls.certresolver=cloudflare
-      - traefik.http.services.qbittorrent-https.loadbalancer.server.port=8080
+      - traefik.http.routers.qbittorrent-rtr.rule=Host(`qbittorrent.local.mtopps.xyz`)
+      - traefik.http.routers.qbittorrent-rtr.entrypoints=https
+      - traefik.http.routers.qbittorrent-rtr.tls=true
+      - traefik.http.services.qbittorrent-svc.loadbalancer.server.port=8080
     environment:
       WEBUI_PORTS: 8080/tcp,8080/udp
       TORRENTING_PORT: 56097/tcp,56097/udp
@@ -146,11 +140,10 @@ services:
       - ${TAUTULLI_CONFIG_DIR}:/config
     labels:
       - traefik.enable=true
-      - traefik.http.routers.tautulli-https.rule=Host(`tautulli.local.mtopps.xyz`)
-      - traefik.http.routers.tautulli-https.entrypoints=websecure
-      - traefik.http.routers.tautulli-https.tls=true
-      - traefik.http.routers.tautulli-https.tls.certresolver=cloudflare
-      - traefik.http.services.tautulli-https.loadbalancer.server.port=8181
+      - traefik.http.routers.tautulli-rtr.rule=Host(`tautulli.local.mtopps.xyz`)
+      - traefik.http.routers.tautulli-rtr.entrypoints=https
+      - traefik.http.routers.tautulli-rtr.tls=true
+      - traefik.http.services.tautulli-svc.loadbalancer.server.port=8181
 
   jdownloader:
     extends:
@@ -162,13 +155,6 @@ services:
     volumes:
       - ${JDOWNLOADER_CONFIG_DIR}:/config:rw
       - ${JDOWNLOADER_DATA_DIR}:/output:rw
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.jdownloader-https.rule=Host(`jdownloader.local.mtopps.xyz`)
-      - traefik.http.routers.jdownloader-https.entrypoints=websecure
-      - traefik.http.routers.jdownloader-https.tls=true
-      - traefik.http.routers.jdownloader-https.tls.certresolver=cloudflare
-      - traefik.http.services.jdownloader-https.loadbalancer.server.port=5800
     environment:
       USER_ID: ${DEFAULT_PUID}
       GROUP_ID: ${DEFAULT_PGID}

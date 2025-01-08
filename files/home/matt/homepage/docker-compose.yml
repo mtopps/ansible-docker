@@ -19,11 +19,10 @@ services:
       - ${HOMEPAGE_CONFIG_PATH}/images:/app/public/images
     labels:
       - traefik.enable=true
-      - traefik.http.routers.homepage.rule=Host(`homepage.local.mtopps.xyz`)
-      - traefik.http.routers.homepage.entrypoints=websecure
-      - traefik.http.routers.homepage.tls=true
-      - traefik.http.routers.homepage.tls.certresolver=cloudflare
-      - traefik.http.services.homepage.loadbalancer.server.port=3000
+      - traefik.http.routers.homepage-rtr.rule=Host(`homepage.local.mtopps.xyz`)
+      - traefik.http.routers.homepage-rtr.entrypoints=https
+      - traefik.http.routers.homepage-rtr.tls=true
+      - traefik.http.services.homepage-svc.loadbalancer.server.port=3000
     environment:
       HOMEPAGE_VAR_TITLE: ${HOMEPAGE_VAR_TITLE}
       HOMEPAGE_VAR_SEARCH_PROVIDER: ${HOMEPAGE_VAR_SEARCH_PROVIDER}
@@ -54,9 +53,6 @@ services:
       HOMEPAGE_VAR_PLEX_TOKEN: ${HOMEPAGE_VAR_PLEX_TOKEN}
       HOMEPAGE_VAR_TAUTULLI_URL: ${HOMEPAGE_VAR_TAUTULLI_URL}
       HOMEPAGE_VAR_TAUTULLI_KEY: ${HOMEPAGE_VAR_TAUTULLI_KEY}
-      HOMEPAGE_VAR_NPM_URL: ${HOMEPAGE_VAR_NPM_URL}
-      HOMEPAGE_VAR_NPM_USERNAME: ${HOMEPAGE_VAR_NPM_USERNAME}
-      HOMEPAGE_VAR_NPM_PASSWORD: ${HOMEPAGE_VAR_NPM_PASSWORD}
       HOMEPAGE_VAR_DISKSTATION_URL: ${HOMEPAGE_VAR_DISKSTATION_URL}
       HOMEPAGE_VAR_DISKSTATION_USERNAME: ${HOMEPAGE_VAR_DISKSTATION_USERNAME}
       HOMEPAGE_VAR_DISKSTATION_PASSWORD: ${HOMEPAGE_VAR_DISKSTATION_PASSWORD}

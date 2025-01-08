@@ -1,13 +1,6 @@
 ---
 ansible_user: matt
 
-docker_compose_dirs:
-  - homepage
-  - media_server
-  - compose
-  - traefik
-  - watchtower
-
 global_vars:
   LOG_MAX_SIZE: "50M"
   LOG_MAX_FILE: "3"

@@ -5,37 +5,31 @@ networks:
 
 services:
   traefik:
-    image: traefik:v3.3.0
-    container_name: traefik
-    hostname: traefik
     extends:
       file: ../compose/base.yaml
       service: base
+    image: traefik:v3.3.0
+    container_name: traefik
+    hostname: traefik
     ports:
       - 80:80
       - 443:443
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-      - ./config/traefik.yml:/etc/traefik/traefik.yml:ro
-      - ./data/certs:/var/traefik/certs/:rw
+      - ./static:/traefik_static:ro
+      - ./config:/traefik_config
+      - ./cert:/traefik_cert
+      - ./logs:/logs
+    command:
+      - --configFile=/traefik_static/traefik.yml
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.traefik.entrypoints=web"
-      - "traefik.http.routers.traefik.rule=Host(`traefik-dashboard.local.mtopps.xyz`)"
-      - "traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_DASHBOARD_CREDENTIALS}"
-      - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
-      - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
-      - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"
-      - "traefik.http.routers.traefik-secure.entrypoints=websecure"
-      - "traefik.http.routers.traefik-secure.rule=Host(`traefik-dashboard.local.mtopps.xyz`)"
-      - "traefik.http.routers.traefik-secure.middlewares=traefik-auth"
-      - "traefik.http.routers.traefik-secure.tls=true"
-      - "traefik.http.routers.traefik-secure.tls.certresolver=cloudflare"
-      - "traefik.http.routers.traefik-secure.tls.domains[0].main=local.mtopps.xyz"
-      - "traefik.http.routers.traefik-secure.tls.domains[0].sans=*.local.mtopps.xyz"
-      - "traefik.http.routers.traefik-secure.service=api@internal"
+      - "traefik.http.routers.api.entrypoints=https"
+      - "traefik.http.routers.api.rule=Host(`traefik-dashboard.local.mtopps.xyz`)"
+      - "traefik.http.routers.api.service=api@internal"
+      - "traefik.http.routers.api.middlewares=auth"
+      - "traefik.http.middlewares.auth.basicauth.users=${TRAEFIK_DASHBOARD_CREDENTIALS}"
     environment:
       CF_DNS_API_TOKEN: ${CF_DNS_API_TOKEN}
       TRAEFIK_DASHBOARD_CREDENTIALS: ${TRAEFIK_DASHBOARD_CREDENTIALS}
