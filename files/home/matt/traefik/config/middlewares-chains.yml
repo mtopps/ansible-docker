@@ -5,4 +5,3 @@ http:
         middlewares:
           - default-rate-limit
           - default-headers
-          - default-compress

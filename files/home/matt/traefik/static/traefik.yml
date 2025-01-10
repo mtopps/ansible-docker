@@ -9,14 +9,13 @@ log:
   maxSize:
   compress: true
 
-
 accessLog:
-  addInternals: true  # things like ping@internal
+  addInternals: true # things like ping@internal
   filePath: /logs/traefik-access.log # In the Common Log Format (CLF) by default
   bufferingSize: 100 # Number of log lines
   fields:
     names:
-      StartUTC: drop  # Write logs in Container Local Time instead of UTC
+      StartUTC: drop # Write logs in Container Local Time instead of UTC
   filters:
     statusCodes:
       - "204-299"
@@ -35,17 +34,15 @@ entryPoints:
         entryPoint:
           to: https
           scheme: https
-          permanent: true
   https:
     address: ":443"
     http:
       tls:
-        options: tls-opts@file
         certResolver: cloudflare
         domains:
-          - main: local.mtopps.xyz
+          - main: local.mtopps.com
             sans:
-              - "*.local.mtopps.xyz"
+              - "*.local.mtopps.com"
     forwardedHeaders:
       trustedIPs:
         - "192.168.1.0/24"
@@ -66,7 +63,7 @@ providers:
 certificatesResolvers:
   cloudflare:
     acme:
-      email: "info@mtopps.xyz"
+      email: "info@mtopps.com"
       storage: /traefik_cert/acme.json
       caServer: "https://acme-v02.api.letsencrypt.org/directory"
       dnsChallenge:

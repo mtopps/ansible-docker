@@ -15,7 +15,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     labels:
       - traefik.enable=true
-      - traefik.http.routers.dozzle-rtr.rule=Host(`dozzle.local.mtopps.xyz`)
+      - traefik.http.routers.dozzle-rtr.rule=Host(`dozzle.local.mtopps.com`)
       - traefik.http.routers.dozzle-rtr.entrypoints=https
-      - traefik.http.routers.dozzle-rtr.tls=true
+      - traefik.http.routers.dozzle-rtr.middlewares=chain-default@file
+      - traefik.http.routers.dozzle-rtr.service=dozzle-svc
       - traefik.http.services.dozzle-svc.loadbalancer.server.port=8080

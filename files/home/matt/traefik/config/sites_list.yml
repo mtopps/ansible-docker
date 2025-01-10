@@ -1,11 +1,10 @@
-
 http:
   # region routers
   routers:
     proxmox-rtr:
       entryPoints:
         - "https"
-      rule: "Host(`proxmox.local.mtopps.xyz`)"
+      rule: "Host(`proxmox.local.mtopps.com`)"
       middlewares:
         - default-middlewares
       tls: {}
@@ -13,7 +12,7 @@ http:
     plex-rtr:
       entryPoints:
         - "https"
-      rule: "Host(`plex.local.mtopps.xyz`)"
+      rule: "Host(`plex.local.mtopps.com`)"
       middlewares:
         - default-middlewares
       tls: {}
@@ -21,19 +20,11 @@ http:
     synology-rtr:
       entryPoints:
         - "https"
-      rule: "Host(`nas.local.mtopps.xyz`)"
+      rule: "Host(`nas.local.mtopps.com`)"
       middlewares:
         - default-middlewares
       tls: {}
       service: synology-svc
-    jdownloader-rtr:
-      entryPoints:
-        - "https"
-      rule: "Host(`jdownloader.local.mtopps.xyz`)"
-      middlewares:
-        - default-middlewares
-      tls: {}
-      service: jdownloader
   # endregion routers
 
   # region services
@@ -52,11 +43,6 @@ http:
       loadBalancer:
         servers:
           - url: "https://192.168.1.13:5001"
-        passHostHeader: true
-    jdownloader-svc:
-      loadBalancer:
-        servers:
-          - url: "http://jdownloader:5800"
         passHostHeader: true
 
   # endregion services

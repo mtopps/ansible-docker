@@ -19,9 +19,10 @@ services:
       - ${HOMEPAGE_CONFIG_PATH}/images:/app/public/images
     labels:
       - traefik.enable=true
-      - traefik.http.routers.homepage-rtr.rule=Host(`homepage.local.mtopps.xyz`)
+      - traefik.http.routers.homepage-rtr.rule=Host(`homepage.local.mtopps.com`)
       - traefik.http.routers.homepage-rtr.entrypoints=https
       - traefik.http.routers.homepage-rtr.tls=true
+      - traefik.http.routers.homepage-rtr.service=homepage-svc
       - traefik.http.services.homepage-svc.loadbalancer.server.port=3000
     environment:
       HOMEPAGE_VAR_TITLE: ${HOMEPAGE_VAR_TITLE}
@@ -59,3 +60,4 @@ services:
       HOMEPAGE_VAR_TRAEFIK_URL: ${HOMEPAGE_VAR_TRAEFIK_URL}
       HOMEPAGE_VAR_TRAEFIK_USERNAME: ${HOMEPAGE_VAR_TRAEFIK_USERNAME}
       HOMEPAGE_VAR_TRAEFIK_PASSWORD: ${HOMEPAGE_VAR_TRAEFIK_PASSWORD}
+      HOMEPAGE_VAR_SPEEDTEST_URL: ${HOMEPAGE_VAR_SPEEDTEST_URL}

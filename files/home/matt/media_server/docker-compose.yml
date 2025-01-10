@@ -16,9 +16,10 @@ services:
       - ${DEFAULT_DATA_DIR}:/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.radarr-rtr.rule=Host(`radarr.local.mtopps.xyz`)
+      - traefik.http.routers.radarr-rtr.rule=Host(`radarr.local.mtopps.com`)
       - traefik.http.routers.radarr-rtr.entrypoints=https
-      - traefik.http.routers.radarr-rtr.tls=true
+      - traefik.http.routers.radarr-rtr.middlewares=chain-default@file
+      - traefik.http.routers.radarr-rtr.service=radarr-svc
       - traefik.http.services.radarr-svc.loadbalancer.server.port=7878
 
   sonarr:
@@ -33,9 +34,10 @@ services:
       - ${DEFAULT_DATA_DIR}:/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.sonarr-rtr.rule=Host(`sonarr.local.mtopps.xyz`)
+      - traefik.http.routers.sonarr-rtr.rule=Host(`sonarr.local.mtopps.com`)
       - traefik.http.routers.sonarr-rtr.entrypoints=https
-      - traefik.http.routers.sonarr-rtr.tls=true
+      - traefik.http.routers.sonarr-rtr.middlewares=chain-default@file
+      - traefik.http.routers.sonarr-rtr.service=sonarr-svc
       - traefik.http.services.sonarr-svc.loadbalancer.server.port=8989
 
   prowlarr:
@@ -49,9 +51,10 @@ services:
       - ${PROWLARR_CONFIG_DIR}:/config
     labels:
       - traefik.enable=true
-      - traefik.http.routers.prowlarr-rtr.rule=Host(`prowlarr.local.mtopps.xyz`)
+      - traefik.http.routers.prowlarr-rtr.rule=Host(`prowlarr.local.mtopps.com`)
       - traefik.http.routers.prowlarr-rtr.entrypoints=https
-      - traefik.http.routers.prowlarr-rtr.tls=true
+      - traefik.http.routers.prowlarr-rtr.middlewares=chain-default@file
+      - traefik.http.routers.prowlarr-rtr.service=prowlarr-svc
       - traefik.http.services.prowlarr-svc.loadbalancer.server.port=9696
 
   readarr:
@@ -66,9 +69,10 @@ services:
       - ${DEFAULT_DATA_DIR}:/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.readarr-rtr.rule=Host(`readarr.local.mtopps.xyz`)
+      - traefik.http.routers.readarr-rtr.rule=Host(`readarr.local.mtopps.com`)
       - traefik.http.routers.readarr-rtr.entrypoints=https
-      - traefik.http.routers.readarr-rtr.tls=true
+      - traefik.http.routers.readarr-rtr.middlewares=chain-default@file
+      - traefik.http.routers.readarr-rtr.service=readarr-svc
       - traefik.http.services.readarr-svc.loadbalancer.server.port=8787
 
   lidarr:
@@ -83,9 +87,10 @@ services:
       - ${DEFAULT_DATA_DIR}:/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.lidarr-rtr.rule=Host(`lidarr.local.mtopps.xyz`)
+      - traefik.http.routers.lidarr-rtr.rule=Host(`lidarr.local.mtopps.com`)
       - traefik.http.routers.lidarr-rtr.entrypoints=https
-      - traefik.http.routers.lidarr-rtr.tls=true
+      - traefik.http.routers.lidarr-rtr.middlewares=chain-default@file
+      - traefik.http.routers.lidarr-rtr.service=lidarr-svc
       - traefik.http.services.lidarr-svc.loadbalancer.server.port=8686
 
   bazarr:
@@ -100,9 +105,10 @@ services:
       - ${DEFAULT_DATA_DIR}:/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.bazarr-rtr.rule=Host(`bazarr.local.mtopps.xyz`)
+      - traefik.http.routers.bazarr-rtr.rule=Host(`bazarr.local.mtopps.com`)
       - traefik.http.routers.bazarr-rtr.entrypoints=https
-      - traefik.http.routers.bazarr-rtr.tls=true
+      - traefik.http.routers.bazarr-rtr.middlewares=chain-default@file
+      - traefik.http.routers.bazarr-rtr.service=bazarr-svc
       - traefik.http.services.bazarr-svc.loadbalancer.server.port=6767
     environment:
       WEBUI_PORTS: 6767/tcp,6767/udp
@@ -121,9 +127,10 @@ services:
       - ${DEFAULT_DATA_DIR}:/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.qbittorrent-rtr.rule=Host(`qbittorrent.local.mtopps.xyz`)
+      - traefik.http.routers.qbittorrent-rtr.rule=Host(`qbittorrent.local.mtopps.com`)
       - traefik.http.routers.qbittorrent-rtr.entrypoints=https
-      - traefik.http.routers.qbittorrent-rtr.tls=true
+      - traefik.http.routers.qbittorrent-rtr.middlewares=chain-default@file
+      - traefik.http.routers.qbittorrent-rtr.service=qbittorrent-svc
       - traefik.http.services.qbittorrent-svc.loadbalancer.server.port=8080
     environment:
       WEBUI_PORTS: 8080/tcp,8080/udp
@@ -140,9 +147,10 @@ services:
       - ${TAUTULLI_CONFIG_DIR}:/config
     labels:
       - traefik.enable=true
-      - traefik.http.routers.tautulli-rtr.rule=Host(`tautulli.local.mtopps.xyz`)
+      - traefik.http.routers.tautulli-rtr.rule=Host(`tautulli.local.mtopps.com`)
       - traefik.http.routers.tautulli-rtr.entrypoints=https
-      - traefik.http.routers.tautulli-rtr.tls=true
+      - traefik.http.routers.tautulli-rtr.middlewares=chain-default@file
+      - traefik.http.routers.tautulli-rtr.service=tautulli-svc
       - traefik.http.services.tautulli-svc.loadbalancer.server.port=8181
 
   jdownloader:
@@ -155,6 +163,13 @@ services:
     volumes:
       - ${JDOWNLOADER_CONFIG_DIR}:/config:rw
       - ${JDOWNLOADER_DATA_DIR}:/output:rw
+    ports:
+      - 5800:5800
     environment:
       USER_ID: ${DEFAULT_PUID}
       GROUP_ID: ${DEFAULT_PGID}
+      DARK_MODE: 1
+      KEEP_APP_RUNNING: 1
+      CLEAN_TMP_DIR: 1
+      WEB_AUTHENTICATION: 1
+      SECURE_CONNECTION: 1

@@ -35,6 +35,17 @@
           password: {{HOMEPAGE_VAR_PROXMOX_PASSWORD}}
           node: pve
 
+    - Synology NAS:
+        icon: synology-dsm.svg
+        href: {{HOMEPAGE_VAR_DISKSTATION_URL}}
+        description: Synology NAS
+        ping: {{HOMEPAGE_VAR_DISKSTATION_URL}}
+        widget:
+          type: diskstation
+          url: {{HOMEPAGE_VAR_DISKSTATION_URL}}
+          username: {{HOMEPAGE_VAR_DISKSTATION_USERNAME}}
+          password: {{HOMEPAGE_VAR_DISKSTATION_PASSWORD}}
+
     - Speedtest Tracker:
         icon: speedtest-tracker.png
         href: {{HOMEPAGE_VAR_SPEEDTEST_URL}}
@@ -57,28 +68,7 @@
           username: {{HOMEPAGE_VAR_TRAEFIK_USERNAME}}
           password: {{HOMEPAGE_VAR_TRAEFIK_PASSWORD}}
 
-    - MediaNAS:
-        icon: synology-dsm.svg
-        href: {{HOMEPAGE_VAR_DISKSTATION_URL}}
-        description: MediaNAS
-        ping: {{HOMEPAGE_VAR_DISKSTATION_URL}}
-        widget:
-          type: diskstation
-          url: {{HOMEPAGE_VAR_DISKSTATION_URL}}
-          username: {{HOMEPAGE_VAR_DISKSTATION_USERNAME}}
-          password: {{HOMEPAGE_VAR_DISKSTATION_PASSWORD}}
-
 - Media:
-    - Plex:
-        icon: plex.svg
-        href: {{HOMEPAGE_VAR_PLEX_URL}}
-        description: Plex Media Server
-        ping: {{HOMEPAGE_VAR_PLEX_URL}}
-        widget:
-          type: plex
-          fields: ["streams", "movies", "tv"]
-          url: {{HOMEPAGE_VAR_PLEX_URL}}
-          key: {{HOMEPAGE_VAR_PLEX_TOKEN}}
 
     - Tautulli:
         icon: tautulli.svg
@@ -152,6 +142,17 @@
           type: bazarr
           url: http://bazarr:6767
           key: {{HOMEPAGE_VAR_BAZARR_KEY}}
+
+    - Plex:
+        icon: plex.svg
+        href: {{HOMEPAGE_VAR_PLEX_URL}}
+        description: Plex Media Server
+        ping: {{HOMEPAGE_VAR_PLEX_URL}}
+        widget:
+          type: plex
+          fields: ["streams", "movies", "tv"]
+          url: {{HOMEPAGE_VAR_PLEX_URL}}
+          key: {{HOMEPAGE_VAR_PLEX_TOKEN}}
 
 - Downloads:
     - qBittorrent:
