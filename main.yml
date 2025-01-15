@@ -27,7 +27,7 @@
         project_src: "{{ ansible_env.HOME }}/{{ item }}"
         state: present
         remove_orphans: true
-        pull: always
+        pull: never
       register: output
       loop:
         - homepage

@@ -1,6 +1,6 @@
 ---
-ansible_user: matt
-
+ansible_user: "matt"
+local_domain: "local.mtopps.com"
 global_vars:
   LOG_MAX_SIZE: "50M"
   LOG_MAX_FILE: "3"

@@ -14,7 +14,7 @@ services:
       - ${SPEEDTEST_TRACKER_CONFIG_DIR}:/config
     labels:
       - traefik.enable=true
-      - traefik.http.routers.speedtest-tracker-rtr.rule=Host(`speedtest-tracker.local.mtopps.com`)
+      - traefik.http.routers.speedtest-tracker-rtr.rule=Host(`speedtest-tracker.${local_domain}`)
       - traefik.http.routers.speedtest-tracker-rtr.entrypoints=https
       - traefik.http.routers.speedtest-tracker-rtr.middlewares=chain-default@file
       - traefik.http.routers.speedtest-tracker-rtr.service=speedtest-tracker-svc

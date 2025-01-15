@@ -19,7 +19,7 @@ services:
       - ${HOMEPAGE_CONFIG_PATH}/images:/app/public/images
     labels:
       - traefik.enable=true
-      - traefik.http.routers.homepage-rtr.rule=Host(`homepage.local.mtopps.com`)
+      - traefik.http.routers.homepage-rtr.rule=Host(`homepage.${local_domain}`)
       - traefik.http.routers.homepage-rtr.entrypoints=https
       - traefik.http.routers.homepage-rtr.tls=true
       - traefik.http.routers.homepage-rtr.service=homepage-svc

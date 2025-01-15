@@ -16,7 +16,7 @@ services:
       - ${DEFAULT_DATA_DIR}:/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.radarr-rtr.rule=Host(`radarr.local.mtopps.com`)
+      - traefik.http.routers.radarr-rtr.rule=Host(`radarr.${local_domain}`)
       - traefik.http.routers.radarr-rtr.entrypoints=https
       - traefik.http.routers.radarr-rtr.middlewares=chain-default@file
       - traefik.http.routers.radarr-rtr.service=radarr-svc
@@ -34,7 +34,7 @@ services:
       - ${DEFAULT_DATA_DIR}:/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.sonarr-rtr.rule=Host(`sonarr.local.mtopps.com`)
+      - traefik.http.routers.sonarr-rtr.rule=Host(`sonarr.${local_domain}`)
       - traefik.http.routers.sonarr-rtr.entrypoints=https
       - traefik.http.routers.sonarr-rtr.middlewares=chain-default@file
       - traefik.http.routers.sonarr-rtr.service=sonarr-svc
@@ -51,7 +51,7 @@ services:
       - ${PROWLARR_CONFIG_DIR}:/config
     labels:
       - traefik.enable=true
-      - traefik.http.routers.prowlarr-rtr.rule=Host(`prowlarr.local.mtopps.com`)
+      - traefik.http.routers.prowlarr-rtr.rule=Host(`prowlarr.${local_domain}`)
       - traefik.http.routers.prowlarr-rtr.entrypoints=https
       - traefik.http.routers.prowlarr-rtr.middlewares=chain-default@file
       - traefik.http.routers.prowlarr-rtr.service=prowlarr-svc
@@ -69,7 +69,7 @@ services:
       - ${DEFAULT_DATA_DIR}:/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.bazarr-rtr.rule=Host(`bazarr.local.mtopps.com`)
+      - traefik.http.routers.bazarr-rtr.rule=Host(`bazarr.${local_domain}`)
       - traefik.http.routers.bazarr-rtr.entrypoints=https
       - traefik.http.routers.bazarr-rtr.middlewares=chain-default@file
       - traefik.http.routers.bazarr-rtr.service=bazarr-svc
@@ -91,7 +91,7 @@ services:
       - ${DEFAULT_DATA_DIR}:/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.qbittorrent-rtr.rule=Host(`qbittorrent.local.mtopps.com`)
+      - traefik.http.routers.qbittorrent-rtr.rule=Host(`qbittorrent.${local_domain}`)
       - traefik.http.routers.qbittorrent-rtr.entrypoints=https
       - traefik.http.routers.qbittorrent-rtr.middlewares=chain-default@file
       - traefik.http.routers.qbittorrent-rtr.service=qbittorrent-svc
@@ -111,7 +111,7 @@ services:
       - ${TAUTULLI_CONFIG_DIR}:/config
     labels:
       - traefik.enable=true
-      - traefik.http.routers.tautulli-rtr.rule=Host(`tautulli.local.mtopps.com`)
+      - traefik.http.routers.tautulli-rtr.rule=Host(`tautulli.${local_domain}`)
       - traefik.http.routers.tautulli-rtr.entrypoints=https
       - traefik.http.routers.tautulli-rtr.middlewares=chain-default@file
       - traefik.http.routers.tautulli-rtr.service=tautulli-svc
