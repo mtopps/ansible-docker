@@ -9,7 +9,7 @@
   tasks:
     - name: Copy directories to remote server
       ansible.builtin.copy:
-        src: "files/home/matt/"
+        src: "files/home/"
         dest: "{{ ansible_env.HOME }}"
         mode: "0775"
 

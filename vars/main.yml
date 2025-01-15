@@ -8,7 +8,7 @@ global_vars:
 
 paths:
   NFS_MOUNT_PATH: "/mnt/data"
-  CONTAINER_CONFIG_DIR: "/home/{{ ansible_user }}/containers"
+  CONTAINER_CONFIG_DIR: "{{ ansible_user_dir }}/containers"
 
 user_group:
   UID: "1027"
@@ -34,7 +34,7 @@ media_server:
 homepage:
   COMPOSE_PROJECT_NAME: "homepage"
   docker:
-    CONFIG_PATH: "{{ paths.CONTAINER_CONFIG_DIR }}/homepage"
+    CONFIG_PATH: "{{ ansible_user_dir }}/homepage/config"
     DATA_ROOT_PATH: "{{ paths.NFS_MOUNT_PATH }}/"
     WEBUI_PORT: 3000
 
