@@ -57,42 +57,6 @@ services:
       - traefik.http.routers.prowlarr-rtr.service=prowlarr-svc
       - traefik.http.services.prowlarr-svc.loadbalancer.server.port=9696
 
-  readarr:
-    extends:
-      file: ../compose/arr.yaml
-      service: arr-stack-container
-    container_name: readarr
-    hostname: readarr
-    image: ghcr.io/hotio/readarr:latest
-    volumes:
-      - ${READARR_CONFIG_DIR}:/config
-      - ${DEFAULT_DATA_DIR}:/data
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.readarr-rtr.rule=Host(`readarr.local.mtopps.com`)
-      - traefik.http.routers.readarr-rtr.entrypoints=https
-      - traefik.http.routers.readarr-rtr.middlewares=chain-default@file
-      - traefik.http.routers.readarr-rtr.service=readarr-svc
-      - traefik.http.services.readarr-svc.loadbalancer.server.port=8787
-
-  lidarr:
-    extends:
-      file: ../compose/arr.yaml
-      service: arr-stack-container
-    container_name: lidarr
-    hostname: lidarr
-    image: ghcr.io/hotio/lidarr:latest
-    volumes:
-      - ${LIDARR_CONFIG_DIR}:/config
-      - ${DEFAULT_DATA_DIR}:/data
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.lidarr-rtr.rule=Host(`lidarr.local.mtopps.com`)
-      - traefik.http.routers.lidarr-rtr.entrypoints=https
-      - traefik.http.routers.lidarr-rtr.middlewares=chain-default@file
-      - traefik.http.routers.lidarr-rtr.service=lidarr-svc
-      - traefik.http.services.lidarr-svc.loadbalancer.server.port=8686
-
   bazarr:
     extends:
       file: ../compose/arr.yaml

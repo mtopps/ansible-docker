@@ -108,30 +108,6 @@
           url: http://sonarr:8989
           key: {{HOMEPAGE_VAR_SONARR_KEY}}
 
-    - Readarr:
-        icon: readarr.svg
-        href: {{HOMEPAGE_VAR_READARR_URL}}
-        description: Book management
-        server: my-docker
-        container: readarr
-        widget:
-          type: readarr
-          fields: ["wanted", "queued"]
-          url: http://readarr:8787
-          key: {{HOMEPAGE_VAR_READARR_KEY}}
-
-    - Lidarr:
-        icon: lidarr.svg
-        href: {{HOMEPAGE_VAR_LIDARR_URL}}
-        description: Music management
-        server: my-docker
-        container: lidarr
-        widget:
-          type: lidarr
-          fields: ["wanted", "queued"]
-          url: http://lidarr:8686
-          key: {{HOMEPAGE_VAR_LIDARR_KEY}}
-
     - Bazarr:
         icon: bazarr.svg
         href: {{HOMEPAGE_VAR_BAZARR_URL}}

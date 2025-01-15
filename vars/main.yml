@@ -27,15 +27,12 @@ media_server:
     RADARR: "radarr"
     SONARR: "sonarr"
     PROWLARR: "prowlarr"
-    READARR: "readarr"
-    LIDARR: "lidarr"
     BAZARR: "bazarr"
   custom_data_dirs:
     JDOWNLOADER: "output"
 
 homepage:
   COMPOSE_PROJECT_NAME: "homepage"
-
   docker:
     CONFIG_PATH: "{{ paths.CONTAINER_CONFIG_DIR }}/homepage"
     DATA_ROOT_PATH: "{{ paths.NFS_MOUNT_PATH }}/"
@@ -50,8 +47,10 @@ homepage:
     WEATHER_TZ: "{{ global_vars.TZ }}"
     WEATHER_UNIT: "metric"
 
+
 traefik:
   COMPOSE_PROJECT_NAME: "traefik"
+
 
 speedtest_tracker:
   COMPOSE_PROJECT_NAME: "speedtest-tracker"

@@ -3,7 +3,7 @@ global:
   sendAnonymousUsage: false
 
 log:
-  filePath: "/logs/logfile.log"
+  # filePath: "/logs/logfile.log"
   level: DEBUG
   noColor: false
   maxSize:
@@ -11,7 +11,7 @@ log:
 
 accessLog:
   addInternals: true # things like ping@internal
-  filePath: /logs/traefik-access.log # In the Common Log Format (CLF) by default
+  # filePath: /logs/traefik-access.log # In the Common Log Format (CLF) by default
   bufferingSize: 100 # Number of log lines
   fields:
     names:

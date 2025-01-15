@@ -20,7 +20,6 @@ services:
       - ./static:/traefik_static:ro
       - ./config:/traefik_config
       - ./cert:/traefik_cert
-      - ./logs:/logs
     command:
       - --configFile=/traefik_static/traefik.yml
     labels:
