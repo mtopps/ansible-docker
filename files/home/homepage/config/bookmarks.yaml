@@ -21,7 +21,7 @@
     - Google Gemini:
         - icon: google-gemini.svg
           href: https://gemini.google.com/
-          description: Google Gemini
+          description: Chat Bot 2
     - LXC Scripts:
         - icon: github.svg
           href: https://helper-scripts.com/scripts
@@ -32,23 +32,23 @@
         - icon: https://beyond-hd.me/favicon.ico
           href: https://beyond-hd.me
           description: Beyond HD
-    - TorrentLeech:
+    - TL:
         - icon: https://www.torrentleech.org/favicon.ico
           href: https://torrentleech.org
           description: TorrentLeech
-    - TorrentDay:
-        - icon: https://www.torrentday.com/zfb/zfb.ico?v=2.0
-          href: https://torrentday.com
-          description: Torrent Day
-    - FileList:
+    - iAnon:
+        - icon: apple.svg
+          href: https://ianon.app/
+          description: macOS Apps
+    - FL:
         - icon: https://filelist.io/favicon.ico
           href: https://filelist.io
           description: FileList
-    - My Anonymouse:
+    - MaM:
         - icon: https://cdn.myanonamouse.net/favicon-32x32.png
           href: https://myanonamouse.net
           description: My Anonymouse
-    - Orpheus:
-        - icon: https://orpheus.network/favicon.ico
+    - OPS:
+        - icon: headphones.png
           href: https://orpheus.network/login.php
           description: Orpheus
