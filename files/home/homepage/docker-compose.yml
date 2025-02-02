@@ -11,7 +11,6 @@ services:
     container_name: homepage
     hostname: homepage
     image: ghcr.io/benphelps/homepage:latest
-    restart: unless-stopped
     volumes:
       - ${HOMEPAGE_CONFIG_PATH}:/app/config
       - ${HOMEPAGE_DATA_ROOT_PATH}:/data
@@ -21,6 +20,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.homepage-rtr.rule=Host(`homepage.${local_domain}`)
       - traefik.http.routers.homepage-rtr.entrypoints=https
+      - traefik.http.routers.homepage-rtr.middlewares=chain-secure@file
       - traefik.http.routers.homepage-rtr.service=homepage-svc
       - traefik.http.services.homepage-svc.loadbalancer.server.port=3000
     environment:
@@ -56,3 +56,4 @@ services:
       HOMEPAGE_VAR_TRAEFIK_USERNAME: ${HOMEPAGE_VAR_TRAEFIK_USERNAME}
       HOMEPAGE_VAR_TRAEFIK_PASSWORD: ${HOMEPAGE_VAR_TRAEFIK_PASSWORD}
       HOMEPAGE_VAR_SPEEDTEST_URL: ${HOMEPAGE_VAR_SPEEDTEST_URL}
+      HOMEPAGE_VAR_DOZZLE_URL: ${HOMEPAGE_VAR_DOZZLE_URL}

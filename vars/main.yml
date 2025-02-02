@@ -38,6 +38,7 @@ homepage:
     DATA_ROOT_PATH: "{{ paths.NFS_MOUNT_PATH }}/"
     WEBUI_PORT: 3000
 
+
   widgets:
     TITLE: "Homepage"
     SEARCH_PROVIDER: "google"
@@ -54,7 +55,7 @@ traefik:
 
 speedtest_tracker:
   COMPOSE_PROJECT_NAME: "speedtest-tracker"
-  APP_KEY: "{{ speedtest_tracker_secrets_app_key }}"
+  APP_KEY: "{{ speedtest_tracker_encrypted.SECRETS_APP_KEY }}"
   APP_NAME: "speedtest-tracker"
   APP_TIMEZONE: "{{ global_vars.TZ }}"
   APP_LOCALE: "en"
@@ -64,3 +65,12 @@ speedtest_tracker:
   PUID: "{{ user_group.PUID }}"
   PGID: "{{ user_group.PGID }}"
   DB_CONNECTION: "sqlite"
+
+duplicati:
+  COMPOSE_PROJECT_NAME: "duplicati"
+  SETTINGS_ENCRYPTION_KEY: "{{ duplicati_encrypted.SETTINGS_ENCRYPTION_KEY }}"
+  PUID: "{{ user_group.PUID }}"
+  PGID: "{{ user_group.PGID }}"
+  CONFIG_DIR: "{{ paths.CONTAINER_CONFIG_DIR }}/duplicati/config"
+  BACKUPS_DIR: "{{ paths.NFS_MOUNT_PATH }}/duplicati/backups"
+  SOURCE_DIR: "{{ paths.CONTAINER_CONFIG_DIR }}"

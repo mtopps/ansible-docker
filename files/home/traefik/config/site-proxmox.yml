@@ -1,0 +1,43 @@
+http:
+  routers:
+    proxmox-rtr:
+      entryPoints:
+        - "https"
+      rule: "Host(`proxmox.local.mtopps.com`)"
+      middlewares:
+        - proxmox-headers
+      tls: {}
+      service: proxmox-svc
+      priority: 100
+
+    proxmox-vnc-rtr:
+      entryPoints:
+        - "https"
+      rule: "Host(`proxmox.local.mtopps.com`) && PathPrefix(`/api2/json/nodes/pve/vncwebsocket`)"
+      middlewares:
+        - proxmox-headers
+        - proxmox-vnc-headers
+      tls: {}
+      service: proxmox-vnc-svc
+      priority: 200
+
+  services:
+    proxmox-svc:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.1.14:8006"
+        passHostHeader: true
+        sticky:
+          cookie: {}
+        serversTransport: "pve"
+
+    proxmox-vnc-svc:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.1.14:8006"
+        passHostHeader: true
+        serversTransport: "pve"
+
+  serversTransports:
+    pve:
+      insecureSkipVerify: true

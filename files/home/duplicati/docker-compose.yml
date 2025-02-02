@@ -1,0 +1,27 @@
+networks:
+  media_net:
+    external: true
+
+services:
+  duplicati:
+    extends:
+      file: ../compose/base.yaml
+      service: base
+    container_name: duplicati
+    hostname: duplicati
+    image: lscr.io/linuxserver/duplicati:latest
+    volumes:
+      - ${CONFIG_DIR}:/config
+      - ${BACKUPS_DIR}:/backups
+      - ${SOURCE_DIR}:/source
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.duplicati-rtr.rule=Host(`duplicati.${local_domain}`)
+      - traefik.http.routers.duplicati-rtr.entrypoints=https
+      - traefik.http.routers.duplicati-rtr.middlewares=chain-secure@file
+      - traefik.http.routers.duplicati-rtr.service=duplicati-svc
+      - traefik.http.services.duplicati-svc.loadbalancer.server.port=8200
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - SETTINGS_ENCRYPTION_KEY=${SETTINGS_ENCRYPTION_KEY}

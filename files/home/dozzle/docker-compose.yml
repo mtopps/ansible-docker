@@ -1,22 +1,20 @@
 networks:
   media_net:
     external: true
-    name: media_net
 
 services:
   dozzle:
     extends:
       file: ../compose/base.yaml
       service: base
-    image: amir20/dozzle:latest
     container_name: dozzle
-
+    hostname: dozzle
+    image: amir20/dozzle:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     labels:
       - traefik.enable=true
       - traefik.http.routers.dozzle-rtr.rule=Host(`dozzle.${local_domain}`)
       - traefik.http.routers.dozzle-rtr.entrypoints=https
-      - traefik.http.routers.dozzle-rtr.middlewares=chain-default@file
       - traefik.http.routers.dozzle-rtr.service=dozzle-svc
       - traefik.http.services.dozzle-svc.loadbalancer.server.port=8080

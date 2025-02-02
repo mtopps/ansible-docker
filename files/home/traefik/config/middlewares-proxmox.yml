@@ -1,0 +1,17 @@
+http:
+  middlewares:
+    proxmox-headers:
+      headers:
+        customRequestHeaders:
+          X-Forwarded-Proto: "https"
+        customResponseHeaders:
+          Strict-Transport-Security: "max-age=63072000"
+
+    proxmox-vnc-headers:
+      headers:
+        customRequestHeaders:
+          Connection: "Upgrade"
+          Upgrade: "websocket"
+        customResponseHeaders:
+          Connection: "Upgrade"
+          Upgrade: "websocket"

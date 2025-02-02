@@ -3,23 +3,29 @@
   hosts: all
   gather_facts: true
   vars_files:
-    - vars/main.yml
-    - vars/vault.yml
+    - "./vars/main.yml"
+    - "./vars/vault.yml"
 
   tasks:
     - name: Copy directories to remote server
       ansible.builtin.copy:
         src: "files/home/"
         dest: "{{ ansible_env.HOME }}"
+        owner: "{{ user_group.PUID }}"
+        group: "{{ user_group.PGID }}"
         mode: "0775"
+      become: true
 
     - name: Create .env files from templates
       ansible.builtin.template:
         src: "{{ item }}"
         dest: "{{ ansible_env.HOME }}/{{ item | basename | regex_replace('\\.env\\.j2$', '') }}/.env"
         mode: "0775"
+        owner: "{{ user_group.PUID }}"
+        group: "{{ user_group.PGID }}"
         backup: true
       loop: "{{ query('fileglob', 'templates/*.env.j2') }}"
+      become: true
       no_log: true
 
     - name: Start containers
@@ -27,7 +33,7 @@
         project_src: "{{ ansible_env.HOME }}/{{ item }}"
         state: present
         remove_orphans: true
-        pull: never
+        pull: always
       register: output
       loop:
         - homepage
@@ -35,3 +41,4 @@
         - traefik
         - dozzle
         - speedtest_tracker
+        - duplicati

@@ -3,7 +3,7 @@
     - YouTube:
         - icon: youtube.svg
           href: https://youtube.com
-          description: Video Monopoly
+          description: Videos
     - Proton Mail:
         - icon: proton-mail.svg
           href: https://mail.proton.me
@@ -11,7 +11,7 @@
     - Reddit:
         - icon: reddit.svg
           href: https://reddit.com
-          description: Social Media Monopoly
+          description: Reddit
 
 - Access:
     - ChatGPT:
@@ -22,32 +22,20 @@
         - icon: google-gemini.svg
           href: https://gemini.google.com/
           description: Chat Bot 2
-    - LXC Scripts:
-        - icon: github.svg
-          href: https://helper-scripts.com/scripts
-          description: Proxmox VE Helper Scripts
+    - Logs:
+        - icon: dozzle.svg
+          href: {{HOMEPAGE_VAR_DOZZLE_URL}}
+          description: Container Logs
 
 - Torrent Sites:
     - BHD:
         - icon: https://beyond-hd.me/favicon.ico
           href: https://beyond-hd.me
           description: Beyond HD
-    - TL:
-        - icon: https://www.torrentleech.org/favicon.ico
-          href: https://torrentleech.org
-          description: TorrentLeech
     - iAnon:
         - icon: apple.svg
           href: https://ianon.app/
           description: macOS Apps
-    - FL:
-        - icon: https://filelist.io/favicon.ico
-          href: https://filelist.io
-          description: FileList
-    - MaM:
-        - icon: https://cdn.myanonamouse.net/favicon-32x32.png
-          href: https://myanonamouse.net
-          description: My Anonymouse
     - OPS:
         - icon: headphones.png
           href: https://orpheus.network/login.php

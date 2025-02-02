@@ -1,0 +1,17 @@
+http:
+  routers:
+    plex-rtr:
+      entryPoints:
+        - "https"
+      rule: "Host(`plex.local.mtopps.com`)"
+      middlewares:
+        - chain-secure
+      tls: {}
+      service: plex-svc
+
+  services:
+    plex-svc:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.1.101:32400"
+        passHostHeader: true
